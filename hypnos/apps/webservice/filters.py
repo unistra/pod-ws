@@ -3,220 +3,234 @@
 
 import django_filters
 from . import models
+from rest_framework.exceptions import APIException
 
-class AuthGroupListFilter(django_filters.FilterSet):
+
+class CustomFilterSet(django_filters.FilterSet):
+    def custom_check_fields(self):
+        data_keys = set([name for name, value in self.data.items()])
+        fields_keys = set([name for name, value in self.filters.items()])
+        if not data_keys.issubset(fields_keys):
+            raise APIException("A filter is wrong")
+
+    def __init__(self, data=None, queryset=None, prefix=None, strict=None):
+        super(CustomFilterSet, self).__init__(data=data, queryset=queryset,
+            prefix=prefix, strict=strict)
+        self.custom_check_fields()
+
+
+class AuthGroupListFilter(CustomFilterSet):
     class Meta:
         model = models.AuthGroup
 
-class AuthGroupPermissionsListFilter(django_filters.FilterSet):
+class AuthGroupPermissionsListFilter(CustomFilterSet):
     class Meta:
         model = models.AuthGroupPermissions
 
-class AuthPermissionListFilter(django_filters.FilterSet):
+class AuthPermissionListFilter(CustomFilterSet):
     class Meta:
         model = models.AuthPermission
 
-class AuthUserListFilter(django_filters.FilterSet):
+class AuthUserListFilter(CustomFilterSet):
     class Meta:
         model = models.AuthUser
 
-class AuthUserGroupsListFilter(django_filters.FilterSet):
+class AuthUserGroupsListFilter(CustomFilterSet):
     class Meta:
         model = models.AuthUserGroups
 
-class AuthUserUserPermissionsListFilter(django_filters.FilterSet):
+class AuthUserUserPermissionsListFilter(CustomFilterSet):
     class Meta:
         model = models.AuthUserUserPermissions
 
-class AuthtokenTokenListFilter(django_filters.FilterSet):
+class AuthtokenTokenListFilter(CustomFilterSet):
     class Meta:
         model = models.AuthtokenToken
 
-class CaptchaCaptchastoreListFilter(django_filters.FilterSet):
+class CaptchaCaptchastoreListFilter(CustomFilterSet):
     class Meta:
         model = models.CaptchaCaptchastore
 
-class CoreContactusListFilter(django_filters.FilterSet):
+class CoreContactusListFilter(CustomFilterSet):
     class Meta:
         model = models.CoreContactus
 
-class CoreEncodingtypeListFilter(django_filters.FilterSet):
+class CoreEncodingtypeListFilter(CustomFilterSet):
     class Meta:
         model = models.CoreEncodingtype
 
-class CoreFilebrowseListFilter(django_filters.FilterSet):
+class CoreFilebrowseListFilter(CustomFilterSet):
     class Meta:
         model = models.CoreFilebrowse
 
-class CorePagesmenubasListFilter(django_filters.FilterSet):
+class CorePagesmenubasListFilter(CustomFilterSet):
     class Meta:
         model = models.CorePagesmenubas
 
-class CoreUserprofileListFilter(django_filters.FilterSet):
+class CoreUserprofileListFilter(CustomFilterSet):
     class Meta:
         model = models.CoreUserprofile
 
-class DjangoAdminLogListFilter(django_filters.FilterSet):
+class DjangoAdminLogListFilter(CustomFilterSet):
     class Meta:
         model = models.DjangoAdminLog
 
-class DjangoContentTypeListFilter(django_filters.FilterSet):
+class DjangoContentTypeListFilter(CustomFilterSet):
     class Meta:
         model = models.DjangoContentType
 
-class DjangoFlatpageListFilter(django_filters.FilterSet):
+class DjangoFlatpageListFilter(CustomFilterSet):
     class Meta:
         model = models.DjangoFlatpage
 
-class DjangoFlatpageSitesListFilter(django_filters.FilterSet):
+class DjangoFlatpageSitesListFilter(CustomFilterSet):
     class Meta:
         model = models.DjangoFlatpageSites
 
-class DjangoMigrationsListFilter(django_filters.FilterSet):
+class DjangoMigrationsListFilter(CustomFilterSet):
     class Meta:
         model = models.DjangoMigrations
 
-class DjangoSessionListFilter(django_filters.FilterSet):
+class DjangoSessionListFilter(CustomFilterSet):
     class Meta:
         model = models.DjangoSession
 
-class DjangoSiteListFilter(django_filters.FilterSet):
+class DjangoSiteListFilter(CustomFilterSet):
     class Meta:
         model = models.DjangoSite
 
-class EasyThumbnailsSourceListFilter(django_filters.FilterSet):
+class EasyThumbnailsSourceListFilter(CustomFilterSet):
     class Meta:
         model = models.EasyThumbnailsSource
 
-class EasyThumbnailsThumbnailListFilter(django_filters.FilterSet):
+class EasyThumbnailsThumbnailListFilter(CustomFilterSet):
     class Meta:
         model = models.EasyThumbnailsThumbnail
 
-class EasyThumbnailsThumbnaildimensionsListFilter(django_filters.FilterSet):
+class EasyThumbnailsThumbnaildimensionsListFilter(CustomFilterSet):
     class Meta:
         model = models.EasyThumbnailsThumbnaildimensions
 
-class FilerClipboardListFilter(django_filters.FilterSet):
+class FilerClipboardListFilter(CustomFilterSet):
     class Meta:
         model = models.FilerClipboard
 
-class FilerClipboarditemListFilter(django_filters.FilterSet):
+class FilerClipboarditemListFilter(CustomFilterSet):
     class Meta:
         model = models.FilerClipboarditem
 
-class FilerFileListFilter(django_filters.FilterSet):
+class FilerFileListFilter(CustomFilterSet):
     class Meta:
         model = models.FilerFile
 
-class FilerFolderListFilter(django_filters.FilterSet):
+class FilerFolderListFilter(CustomFilterSet):
     class Meta:
         model = models.FilerFolder
 
-class FilerFolderpermissionListFilter(django_filters.FilterSet):
+class FilerFolderpermissionListFilter(CustomFilterSet):
     class Meta:
         model = models.FilerFolderpermission
 
-class FilerImageListFilter(django_filters.FilterSet):
+class FilerImageListFilter(CustomFilterSet):
     class Meta:
         model = models.FilerImage
 
-class PodsBuildingListFilter(django_filters.FilterSet):
+class PodsBuildingListFilter(CustomFilterSet):
     class Meta:
         model = models.PodsBuilding
 
-class PodsChannelListFilter(django_filters.FilterSet):
+class PodsChannelListFilter(CustomFilterSet):
     class Meta:
         model = models.PodsChannel
 
-class PodsChannelOwnersListFilter(django_filters.FilterSet):
+class PodsChannelOwnersListFilter(CustomFilterSet):
     class Meta:
         model = models.PodsChannelOwners
 
-class PodsChannelUsersListFilter(django_filters.FilterSet):
+class PodsChannelUsersListFilter(CustomFilterSet):
     class Meta:
         model = models.PodsChannelUsers
 
-class PodsChapterpodsListFilter(django_filters.FilterSet):
+class PodsChapterpodsListFilter(CustomFilterSet):
     class Meta:
         model = models.PodsChapterpods
 
-class PodsContributorpodsListFilter(django_filters.FilterSet):
+class PodsContributorpodsListFilter(CustomFilterSet):
     class Meta:
         model = models.PodsContributorpods
 
-class PodsDisciplineListFilter(django_filters.FilterSet):
+class PodsDisciplineListFilter(CustomFilterSet):
     class Meta:
         model = models.PodsDiscipline
 
-class PodsDocpodsListFilter(django_filters.FilterSet):
+class PodsDocpodsListFilter(CustomFilterSet):
     class Meta:
         model = models.PodsDocpods
 
-class PodsEncodingpodsListFilter(django_filters.FilterSet):
+class PodsEncodingpodsListFilter(CustomFilterSet):
     class Meta:
         model = models.PodsEncodingpods
 
-class PodsEnrichpodsListFilter(django_filters.FilterSet):
+class PodsEnrichpodsListFilter(CustomFilterSet):
     class Meta:
         model = models.PodsEnrichpods
 
-class PodsFavoritesListFilter(django_filters.FilterSet):
+class PodsFavoritesListFilter(CustomFilterSet):
     class Meta:
         model = models.PodsFavorites
 
-class PodsMediacoursesListFilter(django_filters.FilterSet):
+class PodsMediacoursesListFilter(CustomFilterSet):
     class Meta:
         model = models.PodsMediacourses
 
-class PodsNotesListFilter(django_filters.FilterSet):
+class PodsNotesListFilter(CustomFilterSet):
     class Meta:
         model = models.PodsNotes
 
-class PodsPodListFilter(django_filters.FilterSet):
+class PodsPodListFilter(CustomFilterSet):
     class Meta:
         model = models.PodsPod
 
-class PodsPodChannelListFilter(django_filters.FilterSet):
+class PodsPodChannelListFilter(CustomFilterSet):
     class Meta:
         model = models.PodsPodChannel
 
-class PodsPodDisciplineListFilter(django_filters.FilterSet):
+class PodsPodDisciplineListFilter(CustomFilterSet):
     class Meta:
         model = models.PodsPodDiscipline
 
-class PodsPodThemeListFilter(django_filters.FilterSet):
+class PodsPodThemeListFilter(CustomFilterSet):
     class Meta:
         model = models.PodsPodTheme
 
-class PodsRecorderListFilter(django_filters.FilterSet):
+class PodsRecorderListFilter(CustomFilterSet):
     class Meta:
         model = models.PodsRecorder
 
-class PodsReportvideoListFilter(django_filters.FilterSet):
+class PodsReportvideoListFilter(CustomFilterSet):
     class Meta:
         model = models.PodsReportvideo
 
-class PodsThemeListFilter(django_filters.FilterSet):
+class PodsThemeListFilter(CustomFilterSet):
     class Meta:
         model = models.PodsTheme
 
-class PodsTrackpodsListFilter(django_filters.FilterSet):
+class PodsTrackpodsListFilter(CustomFilterSet):
     class Meta:
         model = models.PodsTrackpods
 
-class PodsTypeListFilter(django_filters.FilterSet):
+class PodsTypeListFilter(CustomFilterSet):
     class Meta:
         model = models.PodsType
 
-class TaggitTagListFilter(django_filters.FilterSet):
+class TaggitTagListFilter(CustomFilterSet):
     class Meta:
         model = models.TaggitTag
 
-class TaggitTaggeditemListFilter(django_filters.FilterSet):
+class TaggitTaggeditemListFilter(CustomFilterSet):
     class Meta:
         model = models.TaggitTaggeditem
 
-class TaggitTemplatetagsAmodelListFilter(django_filters.FilterSet):
+class TaggitTemplatetagsAmodelListFilter(CustomFilterSet):
     class Meta:
         model = models.TaggitTemplatetagsAmodel
-

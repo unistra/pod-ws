@@ -116,4 +116,5 @@ url(r'^taggittaggeditem$', views.TaggitTaggeditemList.as_view(), name='taggittag
 url(r'^taggittemplatetagsamodel/(?P<pk>\w+)$', views.TaggitTemplatetagsAmodelDetail.as_view(), name='taggittemplatetagsamodel-all-detail'),
 url(r'^taggittemplatetagsamodel$', views.TaggitTemplatetagsAmodelList.as_view(), name='taggittemplatetagsamodel-all-list'),
 )
-urlpatterns = format_suffix_patterns(urlpatterns, suffix_required=True)
+
+urlpatterns = format_suffix_patterns(urlpatterns, allowed=['json', 'api'])
