@@ -93,6 +93,14 @@ Service web de l'application pod généré à l'aide de `django-hypnos <https://
     * http://127.0.0.1:8000/webservice/<nom_du_model_en_minuscule>/<pk>.json
     * headers : "Authorization: Token <le_token_précédemment_généré>"
 
+  * Par exemple, pour avoir la liste des vidéos au format json :
+
+    * curl -H "Authorization: Token S3CR3T" -XGET 'http://127.0.0.1:8000/webservice/podspod.json'
+
+  * Pour avoir la liste des vidéos au format api :
+
+    * curl -H "Authorization: Token S3CR3T" -XGET 'http://127.0.0.1:8000/webservice/podspod.api'
+
 * Compatible par défaut avec :
 
   * sqlite

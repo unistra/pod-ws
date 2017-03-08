@@ -80,7 +80,7 @@ class AuthUserUserPermissions(models.Model):
 class AuthtokenToken(models.Model):
     key = models.CharField(primary_key=True, max_length=40, db_column='key')
     created = models.DateTimeField(db_column='created')
-    user = models.ForeignKey(AuthUser, unique=True, related_name='+', db_column='user_id')
+    user = models.OneToOneField(AuthUser, related_name='+', db_column='user_id')
 
     class Meta:
         managed = False
@@ -151,7 +151,7 @@ class CoreUserprofile(models.Model):
     affiliation = models.CharField(max_length=50, db_column='affiliation')
     commentaire = models.TextField(db_column='commentaire')
     image = models.ForeignKey('FilerImage', related_name='+', db_column='image_id', blank=True, null=True)
-    user = models.ForeignKey(AuthUser, unique=True, related_name='+', db_column='user_id')
+    user = models.OneToOneField(AuthUser, related_name='+', db_column='user_id')
 
     class Meta:
         managed = False
@@ -272,7 +272,7 @@ class EasyThumbnailsThumbnail(models.Model):
 
 
 class EasyThumbnailsThumbnaildimensions(models.Model):
-    thumbnail = models.ForeignKey(EasyThumbnailsThumbnail, unique=True, related_name='+', db_column='thumbnail_id')
+    thumbnail = models.OneToOneField(EasyThumbnailsThumbnail, related_name='+', db_column='thumbnail_id')
     width = models.IntegerField(db_column='width', blank=True, null=True)
     height = models.IntegerField(db_column='height', blank=True, null=True)
 
@@ -358,7 +358,7 @@ class FilerFolderpermission(models.Model):
 
 
 class FilerImage(models.Model):
-    file_ptr = models.ForeignKey(FilerFile, primary_key=True, related_name='+', db_column='file_ptr_id')
+    file_ptr = models.OneToOneField(FilerFile, primary_key=True, related_name='+', db_column='file_ptr_id')
     field_height = models.IntegerField(db_column='_height', blank=True, null=True) # Field renamed because it started with '_'.
     field_width = models.IntegerField(db_column='_width', blank=True, null=True) # Field renamed because it started with '_'.
     date_taken = models.DateTimeField(db_column='date_taken', blank=True, null=True)
