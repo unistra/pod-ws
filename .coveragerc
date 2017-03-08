@@ -1,0 +1,12 @@
+[run]
+source = 
+    hypnos
+
+[report]
+omit =
+    */tests/*
+    */settings/*
+    setup.py
+    hypnos/wsgi.py
+    fabfile.py
+    */site-packages/*

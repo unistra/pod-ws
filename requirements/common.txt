@@ -1,0 +1,10 @@
+Django>=1.8,<1.9
+djangorestframework==3.3.3
+django-filter==0.13
+djangorestframework-fine-permissions==0.6.0
+six
+chaussette
+psycopg2
+djangorestframework-custom-exceptions
+djangorestframework-custom-paginations
+djangorestframework-custom-filters
