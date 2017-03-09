@@ -10,6 +10,8 @@ from .base import *
 
 DEBUG = True
 
+ALLOWED_HOSTS = ["pod-ws-test.u-strasbg.fr","localhost"]
+
 
 ##########################
 # Database configuration #
