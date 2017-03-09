@@ -10,6 +10,7 @@ class CustomFilterSet(django_filters.FilterSet):
     def custom_check_fields(self):
         data_keys = set([name for name, value in self.data.items()])
         fields_keys = set([name for name, value in self.filters.items()])
+        fields_keys.add("format")
         if not data_keys.issubset(fields_keys):
             raise APIException("A filter is wrong")
 

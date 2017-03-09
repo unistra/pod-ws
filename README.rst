@@ -2,7 +2,7 @@ pod-ws
 ======
 
 
-Service web de l'application pod généré à l'aide de `django-hypnos <https://github.com/unistra/django-hypnos>`_.
+Service web de l'application pod **version 1.5.2** généré à l'aide de `django-hypnos <https://github.com/unistra/django-hypnos>`_.
 
 * Installation en environnement de développement :
 
