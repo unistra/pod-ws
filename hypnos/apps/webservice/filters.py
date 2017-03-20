@@ -210,6 +210,10 @@ class PodsPodListFilter(CustomFilterSet):
             'owner__last_name': ['exact', 'icontains'],
             'owner__first_name': ['exact', 'icontains'],
             'type__title': ['exact', 'icontains'],
+            'podscontributorpods__name': ['exact', 'icontains'],
+            'podspoddiscipline__discipline__title': ['exact', 'icontains'],
+            'podspodchannel__channel__title': ['exact', 'icontains'],
+            'podspodtheme__theme__title': ['exact', 'icontains'],
         }
 
 
