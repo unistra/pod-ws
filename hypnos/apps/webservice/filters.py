@@ -188,9 +188,30 @@ class PodsNotesListFilter(CustomFilterSet):
     class Meta:
         model = models.PodsNotes
 
+
 class PodsPodListFilter(CustomFilterSet):
     class Meta:
         model = models.PodsPod
+        fields = {
+            'id': ['exact', 'lte', 'gte'],
+            'title': ['exact', 'icontains'],
+            'to_encode': ['exact'],
+            'cursus': ['exact'],
+            'allow_downloading': ['exact'],
+            'date_added': ['exact', 'lte', 'gte'],
+            'date_evt': ['exact', 'lte', 'gte'],
+            'description': ['exact', 'icontains'],
+            'encoding_in_progress': ['exact'],
+            'is_360': ['exact'],
+            'is_draft': ['exact'],
+            'is_restricted': ['exact'],
+            'owner__username': ['exact'],
+            'owner__email': ['exact'],
+            'owner__last_name': ['exact', 'icontains'],
+            'owner__first_name': ['exact', 'icontains'],
+            'type__title': ['exact', 'icontains'],
+        }
+
 
 class PodsPodChannelListFilter(CustomFilterSet):
     class Meta:
