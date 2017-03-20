@@ -322,3 +322,8 @@ REST_FRAMEWORK = {
 ########
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
+#######
+# Pod #
+#######
+
+POD_MEDIA_URL = ""

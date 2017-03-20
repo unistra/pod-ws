@@ -260,6 +260,7 @@ class PodsPodSerializer(ModelPermissionsSerializer):
     podstrackpods_set = ModelPermissionsField('webservice.PodsTrackpodsSerializer')
     podschapterpods_set = ModelPermissionsField('webservice.PodsChapterpodsSerializer')
     tags = serializers.ListField()
+    pod_media_url = serializers.CharField()
 
     class Meta:
         model = models.PodsPod

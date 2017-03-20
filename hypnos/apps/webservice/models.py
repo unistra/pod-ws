@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.conf import settings
 
 
 class AuthGroup(models.Model):
@@ -576,6 +577,11 @@ class PodsPod(models.Model):
             tags = []
         finally:
             return tags
+
+    @property
+    def pod_media_url(self):
+        return getattr(settings, "POD_MEDIA_URL", "")
+
 
     class Meta:
         managed = False

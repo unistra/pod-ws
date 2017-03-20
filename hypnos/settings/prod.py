@@ -85,3 +85,9 @@ STATIC_URL = '/site_media/'
 #############################
 
 MEDIA_URL = '/files_media/'
+
+#######
+# Pod #
+#######
+
+POD_MEDIA_URL = ""

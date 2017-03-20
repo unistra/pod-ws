@@ -56,3 +56,8 @@ LOGGING['handlers']['file']['level'] = 'DEBUG'
 for logger in LOGGING['loggers']:
     LOGGING['loggers'][logger]['level'] = 'DEBUG'
 
+#######
+# Pod #
+#######
+
+POD_MEDIA_URL = "https://podcast-test.u-strasbg.fr/media/"
