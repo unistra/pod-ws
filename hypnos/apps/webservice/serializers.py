@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 # This is an auto-generated Django model module.
 
+from rest_framework import serializers
+from rest_framework_fine_permissions.fields import ModelPermissionsField
 from rest_framework_fine_permissions.serializers import ModelPermissionsSerializer
 from . import models
 
@@ -117,6 +119,8 @@ class FilerFolderpermissionSerializer(ModelPermissionsSerializer):
         model = models.FilerFolderpermission
 
 class FilerImageSerializer(ModelPermissionsSerializer):
+    file_ptr = ModelPermissionsField('webservice.FilerFileSerializer')
+
     class Meta:
         model = models.FilerImage
 
@@ -148,18 +152,6 @@ class PodsDisciplineSerializer(ModelPermissionsSerializer):
     class Meta:
         model = models.PodsDiscipline
 
-class PodsDocpodsSerializer(ModelPermissionsSerializer):
-    class Meta:
-        model = models.PodsDocpods
-
-class PodsEncodingpodsSerializer(ModelPermissionsSerializer):
-    class Meta:
-        model = models.PodsEncodingpods
-
-class PodsEnrichpodsSerializer(ModelPermissionsSerializer):
-    class Meta:
-        model = models.PodsEnrichpods
-
 class PodsFavoritesSerializer(ModelPermissionsSerializer):
     class Meta:
         model = models.PodsFavorites
@@ -172,22 +164,6 @@ class PodsNotesSerializer(ModelPermissionsSerializer):
     class Meta:
         model = models.PodsNotes
 
-class PodsPodSerializer(ModelPermissionsSerializer):
-    class Meta:
-        model = models.PodsPod
-
-class PodsPodChannelSerializer(ModelPermissionsSerializer):
-    class Meta:
-        model = models.PodsPodChannel
-
-class PodsPodDisciplineSerializer(ModelPermissionsSerializer):
-    class Meta:
-        model = models.PodsPodDiscipline
-
-class PodsPodThemeSerializer(ModelPermissionsSerializer):
-    class Meta:
-        model = models.PodsPodTheme
-
 class PodsRecorderSerializer(ModelPermissionsSerializer):
     class Meta:
         model = models.PodsRecorder
@@ -199,10 +175,6 @@ class PodsReportvideoSerializer(ModelPermissionsSerializer):
 class PodsThemeSerializer(ModelPermissionsSerializer):
     class Meta:
         model = models.PodsTheme
-
-class PodsTrackpodsSerializer(ModelPermissionsSerializer):
-    class Meta:
-        model = models.PodsTrackpods
 
 class PodsTypeSerializer(ModelPermissionsSerializer):
     class Meta:
@@ -220,3 +192,74 @@ class TaggitTemplatetagsAmodelSerializer(ModelPermissionsSerializer):
     class Meta:
         model = models.TaggitTemplatetagsAmodel
 
+
+##############
+# Customized #
+##############
+
+class PodsEncodingpodsSerializer(ModelPermissionsSerializer):
+    encodingtype = ModelPermissionsField('webservice.CoreEncodingtypeSerializer')
+
+    class Meta:
+        model = models.PodsEncodingpods
+
+
+class PodsEnrichpodsSerializer(ModelPermissionsSerializer):
+    document = ModelPermissionsField('webservice.FilerFileSerializer')
+
+    class Meta:
+        model = models.PodsEnrichpods
+
+
+class PodsDocpodsSerializer(ModelPermissionsSerializer):
+    document = ModelPermissionsField('webservice.FilerFileSerializer')
+
+    class Meta:
+        model = models.PodsDocpods
+
+
+class PodsPodDisciplineSerializer(ModelPermissionsSerializer):
+    discipline = ModelPermissionsField('webservice.PodsDisciplineSerializer')
+
+    class Meta:
+        model = models.PodsPodDiscipline
+
+
+class PodsPodChannelSerializer(ModelPermissionsSerializer):
+    channel = ModelPermissionsField('webservice.PodsChannelSerializer')
+
+    class Meta:
+        model = models.PodsPodChannel
+
+
+class PodsPodThemeSerializer(ModelPermissionsSerializer):
+    theme = ModelPermissionsField('webservice.PodsThemeSerializer')
+
+    class Meta:
+        model = models.PodsPodTheme
+
+
+class PodsTrackpodsSerializer(ModelPermissionsSerializer):
+    src = ModelPermissionsField('webservice.FilerFileSerializer')
+
+    class Meta:
+        model = models.PodsTrackpods
+
+
+class PodsPodSerializer(ModelPermissionsSerializer):
+    owner = ModelPermissionsField('webservice.AuthUserSerializer')
+    type = ModelPermissionsField('webservice.PodsTypeSerializer')
+    thumbnail = ModelPermissionsField('webservice.FilerImageSerializer')
+    podsdocpods_set = ModelPermissionsField('webservice.PodsDocpodsSerializer')
+    podsenrichpods_set = ModelPermissionsField('webservice.PodsEnrichpodsSerializer')
+    podsencodingpods_set = ModelPermissionsField('webservice.PodsEncodingpodsSerializer')
+    podscontributorpods_set = ModelPermissionsField('webservice.PodsContributorpodsSerializer')
+    podspoddiscipline_set = ModelPermissionsField('webservice.PodsPodDisciplineSerializer')
+    podspodchannel_set = ModelPermissionsField('webservice.PodsPodChannelSerializer')
+    podspodtheme_set = ModelPermissionsField('webservice.PodsPodThemeSerializer')
+    podstrackpods_set = ModelPermissionsField('webservice.PodsTrackpodsSerializer')
+    podschapterpods_set = ModelPermissionsField('webservice.PodsChapterpodsSerializer')
+    tags = serializers.ListField()
+
+    class Meta:
+        model = models.PodsPod

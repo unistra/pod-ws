@@ -428,7 +428,7 @@ class PodsChapterpods(models.Model):
     title = models.CharField(max_length=100, db_column='title')
     slug = models.CharField(unique=True, max_length=105, db_column='slug')
     time = models.IntegerField(db_column='time')
-    video = models.ForeignKey('PodsPod', related_name='+', db_column='video_id')
+    video = models.ForeignKey('PodsPod', db_column='video_id')
 
     class Meta:
         managed = False
@@ -441,7 +441,7 @@ class PodsContributorpods(models.Model):
     email_address = models.CharField(max_length=254, db_column='email_address', blank=True, null=True)
     role = models.CharField(max_length=200, db_column='role')
     weblink = models.CharField(max_length=200, db_column='weblink', blank=True, null=True)
-    video = models.ForeignKey('PodsPod', related_name='+', db_column='video_id')
+    video = models.ForeignKey('PodsPod', db_column='video_id')
 
     class Meta:
         managed = False
@@ -465,7 +465,7 @@ class PodsDiscipline(models.Model):
 
 class PodsDocpods(models.Model):
     document = models.ForeignKey(FilerFile, related_name='+', db_column='document_id', blank=True, null=True)
-    video = models.ForeignKey('PodsPod', related_name='+', db_column='video_id')
+    video = models.ForeignKey('PodsPod', db_column='video_id')
 
     class Meta:
         managed = False
@@ -477,7 +477,7 @@ class PodsEncodingpods(models.Model):
     encodingfile = models.CharField(db_column='encodingFile', max_length=255, blank=True, null=True) # Field name made lowercase.
     encodingformat = models.CharField(db_column='encodingFormat', max_length=12) # Field name made lowercase.
     encodingtype = models.ForeignKey(CoreEncodingtype, db_column='encodingType_id', related_name='+') # Field name made lowercase.
-    video = models.ForeignKey('PodsPod', related_name='+', db_column='video_id')
+    video = models.ForeignKey('PodsPod', db_column='video_id')
 
     class Meta:
         managed = False
@@ -497,7 +497,7 @@ class PodsEnrichpods(models.Model):
     embed = models.TextField(db_column='embed', blank=True, null=True)
     document = models.ForeignKey(FilerFile, related_name='+', db_column='document_id', blank=True, null=True)
     image = models.ForeignKey(FilerImage, related_name='+', db_column='image_id', blank=True, null=True)
-    video = models.ForeignKey('PodsPod', related_name='+', db_column='video_id')
+    video = models.ForeignKey('PodsPod', db_column='video_id')
 
     class Meta:
         managed = False
@@ -565,6 +565,18 @@ class PodsPod(models.Model):
     main_lang = models.CharField(max_length=2, db_column='main_lang')
     is_360 = models.BooleanField(db_column='is_360', default=False)
 
+    @property
+    def tags(self):
+        """ special case for tags """
+        try:
+            dct = DjangoContentType.objects.get(app_label="pods", model="pod")
+            tti = TaggitTaggeditem.objects.filter(object_id=self.id, content_type=dct)
+            tags = [i.tag.name for i in tti]
+        except:
+            tags = []
+        finally:
+            return tags
+
     class Meta:
         managed = False
         db_table = 'pods_pod'
@@ -572,7 +584,7 @@ class PodsPod(models.Model):
 
 
 class PodsPodChannel(models.Model):
-    pod = models.ForeignKey(PodsPod, related_name='+', db_column='pod_id')
+    pod = models.ForeignKey(PodsPod, db_column='pod_id')
     channel = models.ForeignKey(PodsChannel, related_name='+', db_column='channel_id')
 
     class Meta:
@@ -583,7 +595,7 @@ class PodsPodChannel(models.Model):
 
 
 class PodsPodDiscipline(models.Model):
-    pod = models.ForeignKey(PodsPod, related_name='+', db_column='pod_id')
+    pod = models.ForeignKey(PodsPod, db_column='pod_id')
     discipline = models.ForeignKey(PodsDiscipline, related_name='+', db_column='discipline_id')
 
     class Meta:
@@ -594,7 +606,7 @@ class PodsPodDiscipline(models.Model):
 
 
 class PodsPodTheme(models.Model):
-    pod = models.ForeignKey(PodsPod, related_name='+', db_column='pod_id')
+    pod = models.ForeignKey(PodsPod, db_column='pod_id')
     theme = models.ForeignKey('PodsTheme', related_name='+', db_column='theme_id')
 
     class Meta:
@@ -652,7 +664,7 @@ class PodsTrackpods(models.Model):
     kind = models.CharField(max_length=10, db_column='kind')
     lang = models.CharField(max_length=2, db_column='lang')
     src = models.ForeignKey(FilerFile, related_name='+', db_column='src_id', blank=True, null=True)
-    video = models.ForeignKey(PodsPod, related_name='+', db_column='video_id')
+    video = models.ForeignKey(PodsPod, db_column='video_id')
 
     class Meta:
         managed = False
