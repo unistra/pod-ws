@@ -10,7 +10,7 @@ from .base import *
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["pod-ws-test.u-strasbg.fr","localhost"]
+ALLOWED_HOSTS = ["pod-ws-test.u-strasbg.fr", "localhost", "130.79.86.93"]
 
 
 ##########################
