@@ -1,16 +1,64 @@
 {
-    "name": "POD API",
-    "authority": "",
-    "base_url": "",
+    "name": "POD WS API",
+    "authority": "Unistra:DI",
+    "base_url": "https://pod-ws-test.u-strasbg.fr",
     "formats": [
         "json"
     ],
-    "version": "0.1",
+    "version": "1.0.0",
 
     "methods": {
+        "get_pods": {
+            "path": "/webservice/podspod.:format",
+            "method": "GET",
+            "authentication": true,
+            "documentation":"Get all pods",
+             "required_params": [
+               "format"
+            ],
+            "optional_params": [
+                "id",
+                "id__lte",
+                "id__gte",
+                "title",
+                "title__icontains",
+                "to_encode",
+                "cursus",
+                "allow_downloading",
+                "date_added",
+                "date_added__lte",
+                "date_added__gte",
+                "date_evt",
+                "date_evt__lte",
+                "date_evt__gte",
+                "description",
+                "description__icontains",
+                "encoding_in_progress",
+                "is_360",
+                "is_draft",
+                "is_restricted",
+                "owner__username",
+                "owner__email",
+                "owner__last_name",
+                "owner__last_name__icontains",
+                "owner__first_name",
+                "owner__first_name__icontains",
+                "type__title",
+                "type__title__icontains",
+                "podscontributorpods__name",
+                "podscontributorpods__name__icontains",
+                "podspoddiscipline__discipline__title",
+                "podspoddiscipline__discipline__title__icontains",
+                "podspodchannel__channel__title",
+                "podspodchannel__channel__title__icontains",
+                "podspodtheme__theme__title",
+                "podspodtheme__theme__title__icontains",
+                "page",
+                "page_size"
+            ]
+        }
     },
-
     "meta": {
-        "authors": ""
+        "authors": "dip unistra"
     }
 }
