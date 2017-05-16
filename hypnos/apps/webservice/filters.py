@@ -197,6 +197,7 @@ class PodsPodListFilter(CustomFilterSet):
             'id': ['exact', 'lte', 'gte'],
             'title': ['exact', 'icontains'],
             'to_encode': ['exact'],
+            'encoding_status': ['exact'],
             'cursus': ['exact'],
             'allow_downloading': ['exact'],
             'date_added': ['exact', 'lte', 'gte'],

@@ -23,6 +23,7 @@
                 "title",
                 "title__icontains",
                 "to_encode",
+                "encoding_status",
                 "cursus",
                 "allow_downloading",
                 "date_added",
