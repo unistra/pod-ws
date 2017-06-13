@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.conf import settings
+from .managers import PodsPodManager
 
 
 class AuthGroup(models.Model):
@@ -565,6 +566,8 @@ class PodsPod(models.Model):
     cursus = models.CharField(max_length=1, db_column='cursus')
     main_lang = models.CharField(max_length=2, db_column='main_lang')
     is_360 = models.BooleanField(db_column='is_360', default=False)
+
+    objects = PodsPodManager()
 
     @property
     def tags(self):

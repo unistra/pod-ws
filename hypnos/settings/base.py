@@ -223,7 +223,8 @@ THIRD_PARTY_APPS = (
     'django_filters',
     'rest_framework_custom_exceptions',
     'rest_framework_custom_paginations',
-    'rest_framework_custom_filters'
+    'rest_framework_custom_filters',
+    'django_extensions'
 )
 
 LOCAL_APPS = (
