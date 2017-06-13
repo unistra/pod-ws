@@ -8,3 +8,4 @@ psycopg2
 djangorestframework-custom-exceptions
 djangorestframework-custom-paginations>=1.2.2
 djangorestframework-custom-filters
+django_extensions

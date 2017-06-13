@@ -598,16 +598,15 @@ class PodsPod(models.Model):
 
     objects = PodsPodManager()
 
-    @property
-    def tags(self):
-        """ special case for tags """
-        try:
-            tti = TaggitTaggeditem.objects.filter(object_id=self.id, content_type__app_label="pods", content_type__model="pod")
-            tags = [i.tag.name for i in tti]
-        except:
-            tags = []
-        finally:
-            return tags
+    # @property
+    # def tags(self):
+    #     """ TODO : special case for tags ; Bad performance, improve it later """
+    #     try:
+    #         tags = [i.tag.name for i in TaggitTaggeditem.objects.filter(object_id=self.id, content_type__app_label="pods", content_type__model="pod")]
+    #     except:
+    #         tags = []
+    #     finally:
+    #         return tags
 
     @property
     def pod_media_url(self):

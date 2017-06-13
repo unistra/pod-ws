@@ -259,7 +259,8 @@ class PodsPodSerializer(ModelPermissionsSerializer):
     podspodtheme_set = ModelPermissionsField('webservice.PodsPodThemeSerializer')
     podstrackpods_set = ModelPermissionsField('webservice.PodsTrackpodsSerializer')
     podschapterpods_set = ModelPermissionsField('webservice.PodsChapterpodsSerializer')
-    tags = serializers.ListField()
+    # TODO : special case for tags ; Bad performance, improve it later
+    # tags = serializers.ListField()
     pod_media_url = serializers.CharField()
 
     class Meta:
