@@ -541,6 +541,35 @@ class PodsNotes(models.Model):
         db_table = 'pods_notes'
         permissions = (('view_podsnotes', 'Can view podsnotes'),)
 
+class TaggitTag(models.Model):
+    name = models.CharField(unique=True, max_length=100, db_column='name')
+    slug = models.CharField(unique=True, max_length=100, db_column='slug')
+
+    class Meta:
+        managed = False
+        db_table = 'taggit_tag'
+        permissions = (('view_taggittag', 'Can view taggittag'),)
+
+
+class TaggitTaggeditem(models.Model):
+    object_id = models.IntegerField(db_column='object_id')
+    content_type = models.ForeignKey(DjangoContentType, related_name='+', db_column='content_type_id')
+    tag = models.ForeignKey(TaggitTag, related_name='+', db_column='tag_id')
+
+    class Meta:
+        managed = False
+        db_table = 'taggit_taggeditem'
+        permissions = (('view_taggittaggeditem', 'Can view taggittaggeditem'),)
+
+
+class TaggitTemplatetagsAmodel(models.Model):
+    name = models.CharField(max_length=50, db_column='name')
+
+    class Meta:
+        managed = False
+        db_table = 'taggit_templatetags_amodel'
+        permissions = (('view_taggittemplatetagsamodel', 'Can view taggittemplatetagsamodel'),)
+
 
 class PodsPod(models.Model):
     video = models.CharField(max_length=255, db_column='video')
@@ -573,8 +602,7 @@ class PodsPod(models.Model):
     def tags(self):
         """ special case for tags """
         try:
-            dct = DjangoContentType.objects.get(app_label="pods", model="pod")
-            tti = TaggitTaggeditem.objects.filter(object_id=self.id, content_type=dct)
+            tti = TaggitTaggeditem.objects.filter(object_id=self.id, content_type__app_label="pods", content_type__model="pod")
             tags = [i.tag.name for i in tti]
         except:
             tags = []
@@ -695,31 +723,3 @@ class PodsType(models.Model):
         permissions = (('view_podstype', 'Can view podstype'),)
 
 
-class TaggitTag(models.Model):
-    name = models.CharField(unique=True, max_length=100, db_column='name')
-    slug = models.CharField(unique=True, max_length=100, db_column='slug')
-
-    class Meta:
-        managed = False
-        db_table = 'taggit_tag'
-        permissions = (('view_taggittag', 'Can view taggittag'),)
-
-
-class TaggitTaggeditem(models.Model):
-    object_id = models.IntegerField(db_column='object_id')
-    content_type = models.ForeignKey(DjangoContentType, related_name='+', db_column='content_type_id')
-    tag = models.ForeignKey(TaggitTag, related_name='+', db_column='tag_id')
-
-    class Meta:
-        managed = False
-        db_table = 'taggit_taggeditem'
-        permissions = (('view_taggittaggeditem', 'Can view taggittaggeditem'),)
-
-
-class TaggitTemplatetagsAmodel(models.Model):
-    name = models.CharField(max_length=50, db_column='name')
-
-    class Meta:
-        managed = False
-        db_table = 'taggit_templatetags_amodel'
-        permissions = (('view_taggittemplatetagsamodel', 'Can view taggittemplatetagsamodel'),)
