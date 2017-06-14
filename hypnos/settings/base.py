@@ -304,6 +304,7 @@ LOGGING = {
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': (
         'rest_framework.filters.DjangoFilterBackend',
+        'rest_framework.filters.OrderingFilter',
         'rest_framework_fine_permissions.filters.FilterPermissionBackend',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (

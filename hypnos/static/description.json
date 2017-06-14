@@ -55,7 +55,8 @@
                 "podspodtheme__theme__title",
                 "podspodtheme__theme__title__icontains",
                 "page",
-                "page_size"
+                "page_size",
+                "ordering"
             ]
         }
     },

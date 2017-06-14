@@ -6,6 +6,7 @@ from . import models
 from . import serializers
 from . import filters
 from rest_framework import generics
+from rest_framework.filters import OrderingFilter
 
 class AuthGroupDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.AuthGroup.objects.all()
@@ -393,6 +394,7 @@ class PodsPodList(generics.ListCreateAPIView):
     queryset = models.PodsPod.objects.all()
     serializer_class = serializers.PodsPodSerializer
     filter_class = filters.PodsPodListFilter
+    ordering_fields = ('id', 'title')
 
 class PodsPodChannelDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.PodsPodChannel.objects.all()

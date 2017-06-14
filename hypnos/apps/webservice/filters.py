@@ -9,7 +9,7 @@ from rest_framework.exceptions import APIException
 class CustomFilterSet(django_filters.FilterSet):
     def custom_check_fields(self):
         data_keys = set([name for name, value in self.data.items()])
-        extra_fields = set(['page', 'page_size', 'format'])
+        extra_fields = set(['page', 'page_size', 'format', 'ordering'])
         fields_keys = set([name for name, value in self.filters.items()])\
             | extra_fields
         if not data_keys.issubset(fields_keys):
