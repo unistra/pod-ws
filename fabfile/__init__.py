@@ -32,6 +32,7 @@ env.remote_static_root = '/var/www/restapis/'
 env.locale = 'fr_FR.UTF-8'  # locale to use on remote
 env.timezone = 'Europe/Paris'  # timezone for remote
 env.keep_releases = 2  # number of old releases to keep before cleaning
+env.extra_goals = ['preprod']
 
 
 @task
@@ -66,6 +67,45 @@ def test():
     }
     execute(build_env)
 
+@task
+def preprod():
+    """Define preprod stage"""
+    env.user = 'root'
+    env.roledefs = {
+        'web': ['podcast-w1-pprd.di.unistra.fr', 'podcast-w2-pprd.di.unistra.fr'],
+        'lb': ['podcast-w1-pprd.di.unistra.fr', 'podcast-w2-pprd.di.unistra.fr'],
+    }
+    env.backends = ['127.0.0.1']
+    env.server_name = 'pod-ws-pprd.app.unistra.fr'
+    env.short_server_name = 'pod-ws-pprd'
+    env.static_folder = '/site_media/'
+    env.server_ip = ''
+    env.no_shared_sessions = False
+    env.server_ssl_on = True
+    env.nginx_location_extra_directives = [
+        'client_max_body_size 4G', 'proxy_request_buffering off', 'proxy_connect_timeout 1800',
+        'proxy_send_timeout 1800', 'proxy_read_timeout 1800', 'send_timeout 1800'
+    ]
+    env.path_to_cert = '/local/ssl/unistra.fr.pem'
+    env.path_to_cert_key = '/local/ssl/unistra.fr.key'
+    env.goal = 'preprod'
+    env.socket_port = '8001'
+    env.socket_host = '127.0.0.1'
+    env.map_settings = {
+        'secret_key': "SECRET_KEY",
+        'default_db_host': "DATABASES['default']['HOST']",
+        'default_db_user': "DATABASES['default']['USER']",
+        'default_db_password': "DATABASES['default']['PASSWORD']",
+        'default_db_name': "DATABASES['default']['NAME']",
+        'default_db_engine': "DATABASES['default']['ENGINE']",
+        'webservice_name': "DATABASES['webservice']['NAME']",
+        'webservice_user': "DATABASES['webservice']['USER']",
+        'webservice_password': "DATABASES['webservice']['PASSWORD']",
+        'webservice_port': "DATABASES['webservice']['PORT']",
+        'webservice_host': "DATABASES['webservice']['HOST']",
+        'webservice_engine': "DATABASES['webservice']['ENGINE']"
+    }
+    execute(build_env)
 
 
 # dont touch after that point if you don't know what you are doing !
