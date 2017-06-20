@@ -20,7 +20,7 @@ DATABASES['default']['NAME'] = '{{ default_db_name }}'
 DATABASES['default']['USER'] = '{{ default_db_user }}'
 DATABASES['default']['PASSWORD'] = '{{ default_db_password }}'
 DATABASES['default']['PORT'] = '{{ default_db_port }}'
-DATABASES['default']['HOST'] = '{{ default_db__host }}'
+DATABASES['default']['HOST'] = '{{ default_db_host }}'
 DATABASES['default']['ENGINE'] = '{{ default_db_engine }}'
 
 

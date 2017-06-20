@@ -76,7 +76,7 @@ def preprod():
         'lb': ['podcast-w1-pprd.di.unistra.fr', 'podcast-w2-pprd.di.unistra.fr'],
     }
     env.backends = ['127.0.0.1']
-    env.server_name = 'pod-ws-pprd.app.unistra.fr'
+    env.server_name = 'pod-ws-pprd.unistra.fr'
     env.short_server_name = 'pod-ws-pprd'
     env.static_folder = '/site_media/'
     env.server_ip = ''
