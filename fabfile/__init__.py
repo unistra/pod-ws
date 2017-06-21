@@ -259,8 +259,6 @@ def post_install_frontend():
     """Post installation of frontend"""
     #execute(pydiploy.django.post_install_frontend)
     execute(pydiploy.require.nginx.web_configuration)
-    put('nginx_with_load_balancer.patch', '/tmp/')
-    sudo("patch /etc/nginx/sites-available/%s.conf < /tmp/nginx_with_load_balancer.patch" % env.server_name)
     execute(pydiploy.require.nginx.nginx_restart)
 
 
