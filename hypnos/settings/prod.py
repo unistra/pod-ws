@@ -37,7 +37,14 @@ DATABASES['webservice']['ENGINE'] = '{{ webservice_engine }}'
 ############################
 
 ALLOWED_HOSTS = [
+    '.u-strasbg.fr',
+    '.unistra.fr',
+    '.di.unistra.fr',
     '127.0.0.1',
+    '130.79.200.183',
+    '130.79.200.197',
+    '130.79.200.204',
+    '130.79.200.162',
 ]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'ssl')

@@ -108,6 +108,46 @@ def preprod():
     execute(build_env)
 
 
+@task
+def prod():
+    """Define preprod stage"""
+    env.user = 'root'
+    env.roledefs = {
+        'web': ['podcast-w1.di.unistra.fr', 'podcast-w2.di.unistra.fr', 'podcast-w3.di.unistra.fr', 'podcast-w4.di.unistra.fr'],
+        'lb': ['podcast-w1.di.unistra.fr', 'podcast-w2.di.unistra.fr', 'podcast-w3.di.unistra.fr', 'podcast-w4.di.unistra.fr'],
+    }
+    env.backends = ['127.0.0.1']
+    env.server_name = 'pod-ws.unistra.fr'
+    env.short_server_name = 'pod-ws'
+    env.static_folder = '/site_media/'
+    env.server_ip = ''
+    env.no_shared_sessions = False
+    env.server_ssl_on = True
+    env.nginx_location_extra_directives = [
+        'client_max_body_size 4G', 'proxy_request_buffering off', 'proxy_connect_timeout 1800',
+        'proxy_send_timeout 1800', 'proxy_read_timeout 1800', 'send_timeout 1800'
+    ]
+    env.path_to_cert = '/etc/ssl/private/unistra.fr.pem'
+    env.path_to_cert_key = '/etc/ssl/private/unistra.fr.key'
+    env.goal = 'prod'
+    env.socket_port = '8001'
+    env.socket_host = '127.0.0.1'
+    env.map_settings = {
+        'secret_key': "SECRET_KEY",
+        'default_db_host': "DATABASES['default']['HOST']",
+        'default_db_user': "DATABASES['default']['USER']",
+        'default_db_password': "DATABASES['default']['PASSWORD']",
+        'default_db_name': "DATABASES['default']['NAME']",
+        'default_db_engine': "DATABASES['default']['ENGINE']",
+        'webservice_name': "DATABASES['webservice']['NAME']",
+        'webservice_user': "DATABASES['webservice']['USER']",
+        'webservice_password': "DATABASES['webservice']['PASSWORD']",
+        'webservice_port': "DATABASES['webservice']['PORT']",
+        'webservice_host': "DATABASES['webservice']['HOST']",
+        'webservice_engine': "DATABASES['webservice']['ENGINE']"
+    }
+    execute(build_env)
+
 # dont touch after that point if you don't know what you are doing !
 
 
@@ -217,6 +257,8 @@ def post_install_frontend():
     """Post installation of frontend"""
     #execute(pydiploy.django.post_install_frontend)
     execute(pydiploy.require.nginx.web_configuration)
+    put('nginx_with_load_balancer.patch', '/tmp/')
+    sudo("patch /etc/nginx/sites-available/%s.conf < /tmp/nginx_with_load_balancer.patch" % env.server_name)
     execute(pydiploy.require.nginx.nginx_restart)
 
 
