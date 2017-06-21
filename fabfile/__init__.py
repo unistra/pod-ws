@@ -94,6 +94,7 @@ def preprod():
     env.map_settings = {
         'secret_key': "SECRET_KEY",
         'default_db_host': "DATABASES['default']['HOST']",
+        'default_db_port': "DATABASES['default']['PORT']",
         'default_db_user': "DATABASES['default']['USER']",
         'default_db_password': "DATABASES['default']['PASSWORD']",
         'default_db_name': "DATABASES['default']['NAME']",
@@ -135,6 +136,7 @@ def prod():
     env.map_settings = {
         'secret_key': "SECRET_KEY",
         'default_db_host': "DATABASES['default']['HOST']",
+        'default_db_port': "DATABASES['default']['PORT']",
         'default_db_user': "DATABASES['default']['USER']",
         'default_db_password': "DATABASES['default']['PASSWORD']",
         'default_db_name': "DATABASES['default']['NAME']",
