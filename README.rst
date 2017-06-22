@@ -2,7 +2,7 @@ pod-ws
 ======
 
 
-Service web de l'application pod **version 1.5.2** généré à l'aide de `django-hypnos <https://github.com/unistra/django-hypnos>`_.
+Service web de l'application pod **version 1.6.1** généré à l'aide de `django-hypnos <https://github.com/unistra/django-hypnos>`_.
 Comme pour l'application pod, ce service web utilise python 2.7.
 
 * Installation en environnement de développement :
@@ -57,7 +57,7 @@ Comme pour l'application pod, ce service web utilise python 2.7.
 
   * Réactiver le virtualenv : ::
 
-        deactivate && workon django-hypnos
+        deactivate && workon pod-ws
 
   * Creation de la base de donnée django : ::
 
@@ -73,7 +73,7 @@ Comme pour l'application pod, ce service web utilise python 2.7.
   * Executer les commander suivante : ::
 
         pip install pydiploy
-        fab tag:master test pre_install deploy loadwebservice post_install --set <parameters>
+        fab tag:master test pre_install deploy post_install --set <parameters>
 
 * Installation en environnement de production :
 
@@ -81,7 +81,7 @@ Comme pour l'application pod, ce service web utilise python 2.7.
   * Executer les commander suivante : ::
 
         pip install pydiploy
-        fab tag:master prod pre_install deploy loadwebservice post_install --set <parameters>
+        fab tag:master prod pre_install deploy post_install --set <parameters>
 
 * Utilisation :
 
