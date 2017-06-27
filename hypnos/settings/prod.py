@@ -97,4 +97,4 @@ MEDIA_URL = '/files_media/'
 # Pod #
 #######
 
-POD_MEDIA_URL = ""
+POD_MEDIA_URL = "https://pod.unistra.fr/media/"
