@@ -63,4 +63,4 @@ POD_MEDIA_URL = "https://podcast-test.u-strasbg.fr/media/"
 # Sympa #
 #########
 
-WHITE_LIST = ["130.79.222.219"]
+WHITE_LIST = ["130.79.222.219", "130.79.202.163"]
