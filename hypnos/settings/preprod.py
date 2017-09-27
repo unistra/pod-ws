@@ -98,3 +98,9 @@ MEDIA_URL = '/files_media/'
 #######
 
 POD_MEDIA_URL = "https://podcast-pprd.unistra.fr/media/"
+
+#########
+# Sympa #
+#########
+
+WHITE_LIST = ["130.79.222.219"]

@@ -335,4 +335,4 @@ POD_MEDIA_URL = ""
 # Sympa #
 #########
 
-WHITE_LIST = ["127.0.0.1", "130.79.222.219"]
+WHITE_LIST = []

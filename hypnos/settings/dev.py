@@ -61,3 +61,9 @@ for logger in LOGGING['loggers']:
 #######
 
 POD_MEDIA_URL = "https://podcast-test.u-strasbg.fr/media/"
+
+#########
+# Sympa #
+#########
+
+WHITE_LIST = ["127.0.0.1"]
