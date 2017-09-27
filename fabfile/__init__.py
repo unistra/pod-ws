@@ -49,7 +49,9 @@ def test():
     env.server_ssl_on = True
     env.nginx_location_extra_directives = [
         'client_max_body_size 4G', 'proxy_request_buffering off', 'proxy_connect_timeout 1800',
-        'proxy_send_timeout 1800', 'proxy_read_timeout 1800', 'send_timeout 1800'
+        'proxy_send_timeout 1800', 'proxy_read_timeout 1800', 'send_timeout 1800',
+        'proxy_set_header X-Real-IP $remote_addr',
+        'proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for'
     ]
     env.goal = 'test'
     env.path_to_cert = '/etc/ssl/certs/wildcard.u-strasbg.fr.pem'

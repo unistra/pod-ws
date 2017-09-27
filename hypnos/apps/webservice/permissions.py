@@ -7,5 +7,5 @@ class WhitelistPermission(permissions.BasePermission):
     """
 
     def has_permission(self, request, view):
-        return request.META['REMOTE_ADDR'] in settings.WHITE_LIST
+        return request.META['REMOTE_ADDR'] in settings.WHITE_LIST or request.META['HTTP_X_REAL_IP'] in settings.WHITE_LIST
            
