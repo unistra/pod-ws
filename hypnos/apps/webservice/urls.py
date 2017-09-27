@@ -115,6 +115,8 @@ url(r'^taggittaggeditem/(?P<pk>\w+)$', views.TaggitTaggeditemDetail.as_view(), n
 url(r'^taggittaggeditem$', views.TaggitTaggeditemList.as_view(), name='taggittaggeditem-all-list'),
 url(r'^taggittemplatetagsamodel/(?P<pk>\w+)$', views.TaggitTemplatetagsAmodelDetail.as_view(), name='taggittemplatetagsamodel-all-detail'),
 url(r'^taggittemplatetagsamodel$', views.TaggitTemplatetagsAmodelList.as_view(), name='taggittemplatetagsamodel-all-list'),
+# Special routes for sympa
+url(r'^mailinglist/(?P<type>\w+)/$', views.mailing_list, name='mailinglist'),
 )
 
 urlpatterns = format_suffix_patterns(urlpatterns, allowed=['json', 'api'])

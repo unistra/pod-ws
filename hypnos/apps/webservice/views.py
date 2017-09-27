@@ -1,12 +1,18 @@
 # -*- coding: utf-8 -*-
 # This is an auto-generated Django model module.
 
+import re
 from rest_framework_fine_permissions.serializers import ModelPermissionsSerializer
+from rest_framework.response import Response
+from rest_framework.decorators import api_view, renderer_classes, permission_classes
+from rest_framework import generics
+from rest_framework.filters import OrderingFilter
 from . import models
 from . import serializers
 from . import filters
-from rest_framework import generics
-from rest_framework.filters import OrderingFilter
+from . import renderers
+from . import permissions
+
 
 class AuthGroupDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.AuthGroup.objects.all()
@@ -495,3 +501,24 @@ class TaggitTemplatetagsAmodelList(generics.ListCreateAPIView):
     serializer_class = serializers.TaggitTemplatetagsAmodelSerializer
     filter_class = filters.TaggitTemplatetagsAmodelListFilter
 
+
+## Special routes for sympa
+@api_view(('GET',))
+@permission_classes((permissions.WhitelistPermission,))
+@renderer_classes((renderers.PlainTextRenderer,))
+def mailing_list(request, type):
+    """
+    routes for sympa:
+    - /webservice/mailinglist/all/ : all users
+    - /webservice/mailinglist/owner/ : only users who have a video
+    """
+    if type.lower() == "all":
+        users = models.AuthUser.objects.all()
+    elif type.lower() == "owner":
+        filter = models.PodsPod.objects.values_list('owner', flat=True).distinct()
+        users = models.AuthUser.objects.filter(id__in=filter)
+    else:
+        raise Exception("Url not found")
+    # Get a valid mails list
+    mails_list = [u.email for u in users if u.email and re.match("[^@]+@[^@]+\.[^@]+", u.email)]
+    return Response('\n'.join(mails_list))
